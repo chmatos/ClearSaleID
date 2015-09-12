@@ -1,13 +1,11 @@
 require 'active_support/all'
+require 'clearsale/analysis'
+require 'clearsale/config'
+require 'clearsale/connector'
+require 'clearsale/logger_formatter_filter'
+require 'clearsale/object'
+require 'clearsale/order'
+require 'clearsale/order_response'
 
 module Clearsale
-  extend ActiveSupport::Autoload
-
-  autoload :Analysis,              'clearsale/analysis'
-  autoload :Config,                'clearsale/config'
-  autoload :Connector,             'clearsale/connector'
-  autoload :LoggerFormatterFilter, 'clearsale/logger_formatter_filter'
-  autoload :Object,                'clearsale/object'
-  autoload :Order,                 'clearsale/order'
-  autoload :OrderResponse,         'clearsale/order_response'
 end
