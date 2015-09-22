@@ -6,8 +6,8 @@ module Clearsale
     NAMESPACE =  "http://www.clearsale.com.br/integration"
 
     URLs = {
-      "homolog"    => 'http://homologacao.clearsale.com.br/Integracaov2/Service.asmx',
-      "production" => 'https://www.clearsale.com.br/integracaov2/service.asmx'
+      "homolog"    => 'http://homologacao.clearsale.com.br/integracaov2/service.asmx',
+      "production" => 'https://integracao.clearsale.com.br/service.asmx'
     }
 
     def self.build(env = ENV['CLEARSALE_ENV'])

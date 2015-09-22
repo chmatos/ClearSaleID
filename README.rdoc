@@ -8,7 +8,7 @@ Defina a variavél de ambiente CLEARSALE_ENV
   export CLEARSALE_ENV=production
 
 Adicione no seu Gemfile
-  gem 'clearsale', :github => 'Baby-com-br/clearsale'
+  gem 'clearsale', :github => 'brunofrank/ClearSaleID'
 
 Execute
   bundle install
@@ -17,7 +17,8 @@ Execute
   require 'clearsale'
 
   order = {
-    :id => 1234,
+    :order_id => 12231234,
+    :session_id => '1l1j23lkj12lk3jl123',
     :paid_at => 2.seconds.ago,
     :billing_address => {
       :street_name => 'Bla St',
@@ -45,18 +46,18 @@ Execute
     :order_items => [
        {
           :product => {
-           :id => 5555,
+           :product_id => 5555,
            :name => 'Pogobol',
-           :category => { :id => 7777, :name => 'Disney' }
+           :category => { :category_id => 7777, :name => 'Disney' }
            },
          :price => 5.00,
          :quantity => 2,
        },
        {
           :product => {
-           :id => 5555,
+           :product_id => 5555,
            :name => 'Pogobol',
-           :category => { :id => 7777, :name => 'Disney' }
+           :category => { :category_id => 7777, :name => 'Disney' }
            },
          :price => 5.00,
          :quantity => 2,
@@ -75,7 +76,7 @@ Execute
 
   user = {
     :email     => 'petergriffin@abc.com',
-    :id        => 8888,
+    :user_id        => 8888,
     :cpf       => '248.783.463-37',
     :full_name => 'Peter Löwenbräu Griffin',
     :birthdate => 40.years.ago,
