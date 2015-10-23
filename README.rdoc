@@ -2,10 +2,10 @@
 
 == Instalação
 Defina a variavél de ambiente CLEARSALE_ENTITYCODE
-  export CLEARSALE_ENTITYCODE=03524C82-F434-4A32-8D34-EFFF2023341B
+  Clearsale::Config.entity_code = '03524C82-F434-4A32-8D34-EFFF2023341B'
 
 Defina a variavél de ambiente CLEARSALE_ENV
-  export CLEARSALE_ENV=production
+  Clearsale::Config.env = 'production' ou 'holog'
 
 Adicione no seu Gemfile
   gem 'clearsale', :github => 'brunofrank/ClearSaleID'
@@ -108,4 +108,3 @@ Execute
   # => :manual_rejection
   # => :cancelled
   # => :fraud
-
