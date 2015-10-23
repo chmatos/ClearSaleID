@@ -14,11 +14,11 @@ module Clearsale
     end
 
     def self.entity_code
-      @@entity_code.nil? || ENV['CLEARSALE_ENTITYCODE']
+      @@entity_code.nil? ? ENV['CLEARSALE_ENTITYCODE'] : @@entity_code
     end
 
     def self.env
-      @@entity_code.nil? || ENV['CLEARSALE_ENTITYCODE']
+      @@env.nil? ? 'homolog' : @@env
     end
   end
 end

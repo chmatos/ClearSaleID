@@ -11,7 +11,7 @@ module Clearsale
     }
 
     def self.build(env = Clearsale::Config.env)
-      url = Clearsale::Config.env || URLs[env] || URLs["homolog"]
+      url = URLs[env]
       proxy = ENV['CLEARSALE_PROXY']
       new url, proxy
     end
