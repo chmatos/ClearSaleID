@@ -10,14 +10,14 @@ module Clearsale
       "production" => 'https://integracao.clearsale.com.br/service.asmx'
     }
 
-    def self.build(env = ENV['CLEARSALE_ENV'])
-      url = ENV["CLEARSALE_URL"] || URLs[env] || URLs["homolog"]
+    def self.build(env = Clearsale::Config.env)
+      url = Clearsale::Config.env || URLs[env] || URLs["homolog"]
       proxy = ENV['CLEARSALE_PROXY']
       new url, proxy
     end
 
     def initialize(endpoint_url, proxy=nil)
-      @token = ENV['CLEARSALE_ENTITYCODE']
+      @token = Clearsale::Config.entity_code
 
       namespaces = {
           'xmlns:soap' => "http://www.w3.org/2003/05/soap-envelope",
