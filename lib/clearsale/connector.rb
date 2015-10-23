@@ -12,7 +12,7 @@ module Clearsale
 
     def self.build(env = Clearsale::Config.env)
       url = URLs[env]
-      proxy = ENV['CLEARSALE_PROXY']
+      proxy = Clearsale::Config.proxy
       new url, proxy
     end
 

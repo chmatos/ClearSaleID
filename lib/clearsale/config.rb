@@ -3,7 +3,7 @@ require 'nori'
 
 module Clearsale
   class Config
-    cattr_accessor :logger, :log, :read_timeout, :open_timeout, :entity_code, :env
+    cattr_accessor :logger, :log, :read_timeout, :open_timeout, :entity_code, :env, :proxy
 
     def self.logger
       @@logger ||= Logger.new(STDOUT)
