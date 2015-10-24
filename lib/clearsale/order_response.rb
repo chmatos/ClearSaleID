@@ -1,18 +1,15 @@
 module Clearsale
   class OrderResponse
     STATUS_MAP = {
-      "APA" => :automatic_approval,
-      "APM" => :manual_approval,
-      "RPM" => :rejected_without_suspicion,
-      "AMA" => :manual_analysis,
-      "ERR" => :error,
-      "NVO" => :waiting,
-      "SUS" => :manual_rejection,
-      "CAN" => :cancelled,
-      "FRD" => :fraud,
+      "APA" => :approved,
+      "PAV" => :approval_pending,
+      "APQ" => :approved_by_survey,
+      "RPQ" => :rejected_by_survey,
+      "RPP" => :rejected_by_policy,
+      "RPA" => :rejected
     }
 
-    attr_reader :order_id, :status, :score
+    attr_reader :order_id, :status, :score, :transaction_id, :quiz_url
 
     def self.build_from_send_order(package)
       new(package.fetch(:package_status, {}))
@@ -24,34 +21,30 @@ module Clearsale
 
     def initialize(hash)
       response = hash.fetch(:orders, {}).fetch(:order, {})
-
       if response.blank?
-        @status = :inexistent_order
+        if hash && hash[:status_code] == "05"
+          @status = :order_already_exists
+        else
+          @status = :inexistent_order
+        end
       else
         @order_id = response[:id].gsub(/[a-zA-Z]*/, '').to_i
         @score    = response[:score].to_f
+        @quiz_url    = response[:quiz_url]
         @status   = STATUS_MAP[response[:status]]
       end
     end
 
     def approved?
-      @status == :automatic_approval || @status == :manual_approval
+      @status == :approved || @status == :approved_by_survey
     end
 
     def rejected?
-      @status == :rejected_without_suspicion || @status == :manual_rejection || @status == :cancelled
+      @status == :rejected_by_survey || @status == :rejected_by_policy || @status == :rejected
     end
 
-    def fraud?
-      @status == :fraud
-    end
-
-    def manual_analysis?
-      @status == :manual_analysis
-    end
-
-    def inexistent_order?
-      @status == :inexistent_order
+    def pending?
+      @status == :approval_pending
     end
   end
 end

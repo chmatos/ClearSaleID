@@ -17,7 +17,7 @@ Execute
   require 'clearsale'
 
   order = {
-    :order_id => 12231234,
+    :order_id => 11989283922,
     :session_id => '1l1j23lkj12lk3jl123',
     :paid_at => 2.seconds.ago,
     :billing_address => {
@@ -39,9 +39,9 @@ Execute
       :postal_code => '00100-011'
     },
     :installments => 3,
-    :total_items => 20.00,
-    :total_order => 25.00,
-    :items_count => 3,
+    :total_items => 150.00,
+    :total_order => 150.00,
+    :items_count => 2,
     :created_at => Time.current,
     :order_items => [
        {
@@ -50,8 +50,8 @@ Execute
            :name => 'Pogobol',
            :category => { :category_id => 7777, :name => 'Disney' }
            },
-         :price => 5.00,
-         :quantity => 2,
+         :price => 75.00,
+         :quantity => 1,
        },
        {
           :product => {
@@ -59,9 +59,9 @@ Execute
            :name => 'Pogobol',
            :category => { :category_id => 7777, :name => 'Disney' }
            },
-         :price => 5.00,
-         :quantity => 2,
-       },
+         :price => 75.00,
+         :quantity => 1,
+       }
     ],
   }
 
@@ -71,7 +71,7 @@ Execute
     :card_expiration => '05/2012',
     :card_security_code => '123',
     :acquirer => 'visa',
-    :amount => 50.00,
+    :amount => 150.00,
   }
 
   user = {
