@@ -10,7 +10,7 @@ Defina a variavél de ambiente CLEARSALE_ENV
   Clearsale::Config.env = 'production' ou 'holog'
 
 Adicione no seu Gemfile
-  gem 'clearsaleID', :github => 'brunofrank/ClearSaleID'
+  gem 'clearsaleID'
 
 Execute
   bundle install
