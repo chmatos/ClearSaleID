@@ -1,6 +1,6 @@
 = ClearsaleID
 
-  Esta gem foi inspirada na Gem https://github.com/Baby-com-br/clearsale, fiz apenas a mudança dos campos e URL conformo manual da clearsale, deixo um agradecimento ao Daniel Konishi, pelo esforço.
+Esta gem foi inspirada na Gem https://github.com/Baby-com-br/clearsale, fiz apenas a mudança dos campos e URL conformo manual da clearsale, deixo um agradecimento ao Daniel Konishi, pelo esforço.
 
 == Instalação
 Defina a variavél de ambiente CLEARSALE_ENTITYCODE
