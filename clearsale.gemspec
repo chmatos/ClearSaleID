@@ -3,15 +3,13 @@ $:.push File.expand_path("../lib", __FILE__)
 require "clearsale/version"
 
 Gem::Specification.new do |s|
-  s.name        = "clearsale"
+  s.name        = "clearsaleID"
   s.version     = Clearsale::VERSION
-  s.authors     = ["Daniel Konishi"]
-  s.email       = %w[dkonishi@gmail.com]
-  s.homepage    = "http://github.com/Baby-com-br/clearsale"
-  s.summary     = "clearsale gem to use Clearsale service"
-  s.description = "clearsale gem to use Clearsale service"
-
-  s.rubyforge_project = "clearsale"
+  s.authors     = ["Bruno Frank"]
+  s.email       = %w[bfscordeiro@gmail.com]
+  s.homepage    = "http://github.com/brunofrank/ClearSaleID"
+  s.summary     = "clearsale gem to use Clearsale ClearID service"
+  s.description = "clearsale gem to use Clearsale ClearID service"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

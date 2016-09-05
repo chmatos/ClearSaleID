@@ -52,7 +52,7 @@ module Clearsale
       builder.tag!('Nome', user.full_name)
       builder.tag!('Email', user.email)
       builder.tag!('Sexo', user.gender.downcase)
-      builder.tag!('Nascimento', user.birthdate.to_time.strftime("%Y-%m-%dT%H:%M:%S")) if user.birthdate.present?      
+      builder.tag!('Nascimento', user.birthdate.to_time.strftime("%Y-%m-%dT%H:%M:%S")) if user.birthdate.present?
       build_address(builder, billing_address)
       builder.tag!('Telefones') do |b|
         build_phone(b, user)
@@ -68,7 +68,7 @@ module Clearsale
         builder.tag!('Cidade', address.city)
         builder.tag!('UF', address.state)
         builder.tag!('CEP', address.postal_code)
-        builder.tag!('Pais', 'Brasil')        
+        builder.tag!('Pais', 'Brasil')
       end
     end
 
@@ -81,9 +81,9 @@ module Clearsale
         builder.tag!('Cidade', address.city)
         builder.tag!('UF', address.state)
         builder.tag!('CEP', address.postal_code)
-        builder.tag!('Pais', 'Brasil')        
+        builder.tag!('Pais', 'Brasil')
       end
-    end    
+    end
 
     def self.build_phone(builder, user)
       if user.phone.present?
@@ -109,8 +109,9 @@ module Clearsale
 
         b.tag!('QtdParcelas', order.installments)
 
-        b.tag!('HashNumeroCartao', payment.card_number)
+        b.tag!('HashNumeroCartao', payment.card_hash)
         b.tag!('BinCartao', payment.card_number[0..5])
+        b.tag!('Cartao4Ultimos', payment.card_number.reverse[0..3])
         b.tag!('TipoCartao', CARD_TYPE_MAP.fetch(payment.acquirer.to_sym, 4)) # Failover is 'outros'
         b.tag!('DataValidadeCartao', payment.card_expiration)
         b.tag!('NomeTitularCartao', payment.customer_name)
