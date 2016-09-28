@@ -1,3 +1,4 @@
+{<img alt='Stories in Ready' src='https://badge.waffle.io/brunofrank/ClearSaleID.png?label=ready&title=Ready' />}[https://waffle.io/brunofrank/ClearSaleID]
 = ClearsaleID
 
 Esta gem foi inspirada na Gem https://github.com/Baby-com-br/clearsale, fiz apenas a mudança dos campos e URL conformo manual da clearsale, deixo um agradecimento ao Daniel Konishi, pelo esforço.
