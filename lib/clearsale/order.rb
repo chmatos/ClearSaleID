@@ -15,13 +15,14 @@ module Clearsale
           build_order(b, order, payment, user)
         end
       end
+      puts xml.to_s
       xml.to_s
     end
 
     def self.build_order(builder, order, payment, user)
-      builder.tag!('PedidoID', order.order_id)
+      builder.tag!('PedidoID', order[:order_id])
       builder.tag!('Data', order.created_at.strftime("%Y-%m-%dT%H:%M:%S"))
-      builder.tag!('Email', user.email)
+      builder.tag!('Email', user[:email])
       builder.tag!('ValorTotalItens', order.total_items)
       builder.tag!('ValorTotalPedido', order.total_order)
       builder.tag!('QtdParcelas', order.installments)
@@ -61,26 +62,26 @@ module Clearsale
 
     def self.build_address(builder, address)
       builder.tag!('Endereco') do |b|
-        builder.tag!('Logradouro', address.street_name)
-        builder.tag!('Complemento', address.complement)
-        builder.tag!('Numero', address.number)
-        builder.tag!('Bairro', address.neighborhood)
-        builder.tag!('Cidade', address.city)
-        builder.tag!('UF', address.state)
-        builder.tag!('CEP', address.postal_code)
+        builder.tag!('Logradouro', address[:street_name])
+        builder.tag!('Complemento', address[:complement])
+        builder.tag!('Numero', address[:number])
+        builder.tag!('Bairro', address[:neighborhood])
+        builder.tag!('Cidade', address[:city])
+        builder.tag!('UF', address[:state])
+        builder.tag!('CEP', address[:postal_code])
         builder.tag!('Pais', 'Brasil')
       end
     end
 
     def self.build_collection_address(builder, address)
       builder.tag!('EnderecoCobranca') do |b|
-        builder.tag!('Logradouro', address.street_name)
-        builder.tag!('Complemento', address.complement)
-        builder.tag!('Numero', address.number)
-        builder.tag!('Bairro', address.neighborhood)
-        builder.tag!('Cidade', address.city)
-        builder.tag!('UF', address.state)
-        builder.tag!('CEP', address.postal_code)
+        builder.tag!('Logradouro', address[:street_name])
+        builder.tag!('Complemento', address[:complement])
+        builder.tag!('Numero', address[:number])
+        builder.tag!('Bairro', address[:neighborhood])
+        builder.tag!('Cidade', address[:city])
+        builder.tag!('UF', address[:state])
+        builder.tag!('CEP', address[:postal_code])
         builder.tag!('Pais', 'Brasil')
       end
     end
@@ -123,12 +124,12 @@ module Clearsale
 
     def self.build_item(builder, order_item)
       builder.tag!('Item') do |b|
-        b.tag!('CodigoItem', order_item.product.product_id)
-        b.tag!('NomeItem', order_item.product.name)
-        b.tag!('ValorItem', order_item.price)
-        b.tag!('Quantidade', order_item.quantity)
-        b.tag!('CodigoCategoria', order_item.product.category.category_id) if order_item.product.category.try(:category_id).present?
-        b.tag!('NomeCategoria', order_item.product.category.name) if order_item.product.category.try(:name).present?
+        b.tag!('CodigoItem', order_item[:product][:product_id])
+        b.tag!('NomeItem', order_item[:product][:name])
+        b.tag!('ValorItem', order_item[:price])
+        b.tag!('Quantidade', order_item[:quantity])
+        b.tag!('CodigoCategoria', order_item[:product][:category].category_id) if order_item[:product][:category].try(:category_id).present?
+        b.tag!('NomeCategoria', order_item[:product][:category].name) if order_item[:product][:category].try(:name).present?
       end
     end
   end
