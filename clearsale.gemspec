@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Clearsale::VERSION
   s.authors     = ["Bruno Frank"]
   s.email       = %w[bfscordeiro@gmail.com]
-  s.homepage    = "http://github.com/brunofrank/ClearSaleID"
+  s.homepage    = "http://github.com/chmatos/ClearSaleID"
   s.summary     = "clearsale gem to use Clearsale ClearID service"
   s.description = "clearsale gem to use Clearsale ClearID service"
 

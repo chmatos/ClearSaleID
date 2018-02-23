@@ -15,6 +15,7 @@ module Clearsale
           build_order(b, order, payment, user)
         end
       end
+      puts 'new'
       puts xml.to_s
       xml.to_s
     end
