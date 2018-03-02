@@ -22,7 +22,7 @@ module Clearsale
     end
 
     def self.build_order(builder, order, payment, user)
-      puts 'clearsale-chmatos 1.0.11'
+      puts 'clearsale-chmatos 1.0.12'
       builder.tag!('PedidoID', order[:id])
       builder.tag!('Data', order.created_at.strftime("%Y-%m-%dT%H:%M:%S"))
       builder.tag!('Email', user[:email])
@@ -63,7 +63,7 @@ module Clearsale
       builder.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip : nil)
       builder.tag!('Nome', user.full_name)
       builder.tag!('Email', user.email)
-      builder.tag!('Sexo', user.gender.downcase)
+      builder.tag!('Sexo', user.gender&.downcase)
       builder.tag!('Nascimento', user.birthdate.to_time.strftime("%Y-%m-%dT%H:%M:%S")) if user.birthdate.present?
       build_address(builder, billing_address) if billing_address.present?
       builder.tag!('Telefones') do |b|
@@ -115,7 +115,7 @@ module Clearsale
         b.tag!('Valor', payment.amount)
         b.tag!('TipoPagamentoID', 1) # 1=credit_card
         b.tag!('QtdParcelas', order.installments)
-        b.tag!('HashNumeroCartao', Digest::SHA1.hexdigest(payment.card_hash || ''))
+        b.tag!('HashNumeroCartao', payment.card_hash.present? ? Digest::SHA1.hexdigest(payment.card_hash) : '')
         b.tag!('BinCartao', payment.card_number[0..5] || payment.card_bin)
         b.tag!('Cartao4Ultimos', payment.card_number.reverse[0..3] || payment.card_final)
         b.tag!('TipoCartao', CARD_TYPE_MAP.fetch(payment.acquirer.to_sym, 4)) # Failover is 'outros'
