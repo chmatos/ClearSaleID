@@ -22,7 +22,7 @@ module Clearsale
     end
 
     def self.build_order(builder, order, payment, user)
-      puts "clearsale-chmatos #{Clearsale::VERSION}'
+      puts "clearsale-chmatos #{Clearsale::VERSION}"
       builder.tag!('PedidoID', order[:id])
       builder.tag!('Data', order.created_at.strftime("%Y-%m-%dT%H:%M:%S"))
       builder.tag!('Email', user[:email])
