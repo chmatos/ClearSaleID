@@ -12,15 +12,15 @@ module Clearsale
     attr_reader :order_id, :status, :score, :transaction_id, :quiz_url, :status_code, :xml
 
     def self.build_from_send_order(package, xml)
-      @xml = xml
-      new(package.fetch(:package_status, {}))
+      new(package.fetch(:package_status, {}), xml)
     end
 
     def self.build_from_update(package)
       new(package.fetch(:clear_sale, {}))
     end
 
-    def initialize(hash)
+    def initialize(hash, xml = nil)
+      @xml = xml
       response = hash.fetch(:orders, {}).fetch(:order, {})
       if response.blank?
           @status_code = hash[:status_code]
