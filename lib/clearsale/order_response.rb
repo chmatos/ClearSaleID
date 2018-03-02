@@ -9,9 +9,10 @@ module Clearsale
       "RPA" => :rejected
     }
 
-    attr_reader :order_id, :status, :score, :transaction_id, :quiz_url, :status_code
+    attr_reader :order_id, :status, :score, :transaction_id, :quiz_url, :status_code, :xml
 
-    def self.build_from_send_order(package)
+    def self.build_from_send_order(package, xml)
+      @xml = xml
       new(package.fetch(:package_status, {}))
     end
 

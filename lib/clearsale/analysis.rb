@@ -12,7 +12,7 @@
       order_xml = Clearsale::Order.to_xml(order, payment, user)
       request = {"xml" => order_xml}
 
-      OrderResponse.build_from_send_order(connector.do_request('SendOrders', request))
+      OrderResponse.build_from_send_order(connector.do_request('SendOrders', request), order_xml)
     end
 
     def self.clear_connector
