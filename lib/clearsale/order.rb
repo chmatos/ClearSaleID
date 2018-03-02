@@ -117,7 +117,7 @@ module Clearsale
         b.tag!('QtdParcelas', order.installments)
         b.tag!('HashNumeroCartao', payment.card_hash.present? ? Digest::SHA1.hexdigest(payment.card_hash) : '')
         b.tag!('BinCartao', payment.card_number&[0..5] || payment.card_bin)
-        b.tag!('Cartao4Ultimos', payment.card_number.reverse[0..3] || payment.card_final)
+        b.tag!('Cartao4Ultimos', payment.card_number&.reverse[0..3] || payment.card_final)
         b.tag!('TipoCartao', CARD_TYPE_MAP.fetch(payment.acquirer.to_sym, 4)) # Failover is 'outros'
         b.tag!('DataValidadeCartao', payment.card_expiration)
         b.tag!('NomeTitularCartao', payment.customer_name)
