@@ -3,10 +3,10 @@ $:.push File.expand_path("../lib", __FILE__)
 require "clearsale/version"
 
 Gem::Specification.new do |s|
-  s.name        = "clearsaleID"
+  s.name        = "clearsale-chmatos"
   s.version     = Clearsale::VERSION
-  s.authors     = ["Bruno Frank"]
-  s.email       = %w[bfscordeiro@gmail.com]
+  s.authors     = ["Christiano Matos"]
+  s.email       = %w[chmatos@gmail.com]
   s.homepage    = "http://github.com/chmatos/ClearSaleID"
   s.summary     = "clearsale gem to use Clearsale ClearID service"
   s.description = "clearsale gem to use Clearsale ClearID service"

@@ -9,7 +9,7 @@ module Clearsale
       "RPA" => :rejected
     }
 
-    attr_reader :order_id, :status, :score, :transaction_id, :quiz_url
+    attr_reader :order_id, :status, :score, :transaction_id, :quiz_url, :status_code
 
     def self.build_from_send_order(package)
       new(package.fetch(:package_status, {}))
@@ -22,6 +22,7 @@ module Clearsale
     def initialize(hash)
       response = hash.fetch(:orders, {}).fetch(:order, {})
       if response.blank?
+          @status_code = hash[:status_code]
         if hash && hash[:status_code] == "05"
           @status = :order_already_exists
         else
@@ -30,7 +31,7 @@ module Clearsale
       else
         @order_id = response[:id].gsub(/[a-zA-Z]*/, '').to_i
         @score    = response[:score].to_f
-        @quiz_url    = response[:quiz_url]
+        @quiz_url = response[:quiz_url]
         @status   = STATUS_MAP[response[:status]]
       end
     end
