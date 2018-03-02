@@ -22,7 +22,7 @@ module Clearsale
     end
 
     def self.build_order(builder, order, payment, user)
-      puts 'clearsale-chmatos 1.0.10'
+      puts 'clearsale-chmatos 1.0.11'
       builder.tag!('PedidoID', order[:id])
       builder.tag!('Data', order.created_at.strftime("%Y-%m-%dT%H:%M:%S"))
       builder.tag!('Email', user[:email])
@@ -121,7 +121,7 @@ module Clearsale
         b.tag!('TipoCartao', CARD_TYPE_MAP.fetch(payment.acquirer.to_sym, 4)) # Failover is 'outros'
         b.tag!('DataValidadeCartao', payment.card_expiration)
         b.tag!('NomeTitularCartao', payment.customer_name)
-        b.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip) : nil
+        b.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip : nil)
         build_collection_address(b, order.billing_address)
       end
     end
