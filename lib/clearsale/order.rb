@@ -22,7 +22,7 @@ module Clearsale
     end
 
     def self.build_order(builder, order, payment, user)
-      puts 'clearsale-chmatos 1.0.9'
+      puts 'clearsale-chmatos 1.0.10'
       builder.tag!('PedidoID', order[:id])
       builder.tag!('Data', order.created_at.strftime("%Y-%m-%dT%H:%M:%S"))
       builder.tag!('Email', user[:email])
@@ -60,7 +60,7 @@ module Clearsale
     def self.build_user_data(builder, user, billing_address)
       builder.tag!('UsuarioID', user.id)
       builder.tag!('TipoUsuario', 1) # Pessoa Física
-      builder.tag!('DocumentoLegal1', user.cpf.gsub(/[\.\-]*/, '').strip)
+      builder.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip : nil)
       builder.tag!('Nome', user.full_name)
       builder.tag!('Email', user.email)
       builder.tag!('Sexo', user.gender.downcase)
@@ -99,11 +99,11 @@ module Clearsale
 
     def self.build_phone(builder, user)
       if user.phone.present?
-        stripped_phone = user.phone.gsub(/\(*\)*\s*\-*/, '')
+        stripped_phone = user.phone.present? ? user.phone.gsub(/\(*\)*\s*\-*/, '') : nil
         builder.tag!('Telefone') do |b|
           b.tag!('Tipo', user.phone_type || 0) # 0=Undefined
-          b.tag!('DDD', stripped_phone[0..1])
-          b.tag!('Numero', stripped_phone[2..-1])
+          b.tag!('DDD', stripped_phone.present? ? stripped_phone[0..1] : nil)
+          b.tag!('Numero', stripped_phone.present? ? stripped_phone[2..-1] : nil)
         end
       end
     end
@@ -121,7 +121,7 @@ module Clearsale
         b.tag!('TipoCartao', CARD_TYPE_MAP.fetch(payment.acquirer.to_sym, 4)) # Failover is 'outros'
         b.tag!('DataValidadeCartao', payment.card_expiration)
         b.tag!('NomeTitularCartao', payment.customer_name)
-        b.tag!('DocumentoLegal1', user.cpf.gsub(/[\.\-]*/, '').strip)
+        b.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip) : nil
         build_collection_address(b, order.billing_address)
       end
     end
