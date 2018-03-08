@@ -9,7 +9,7 @@ module Clearsale
       "RPA" => :rejected
     }
 
-    attr_reader :order_id, :status, :score, :transaction_id, :quiz_url, :status_code, :xml
+    attr_reader :order_id, :status, :score, :transaction_id, :quiz_url, :status_code, :xml, :name
 
     def self.build_from_send_order(package, xml)
       new(package.fetch(:package_status, {}), xml)
@@ -21,6 +21,7 @@ module Clearsale
 
     def initialize(hash, xml = nil)
       @xml = xml
+      @name = 'cleasale'
       response = hash.fetch(:orders, {}).fetch(:order, {})
       if response.blank?
           @status_code = hash[:status_code]
