@@ -84,7 +84,7 @@ module Clearsale
       end
     end
 
-    def self.build_collection_address(builder, address)
+    def self.build_collection_address(builder, address) if
       builder.tag!('EnderecoCobranca') do |b|
         builder.tag!('Logradouro', address[:street_name])
         builder.tag!('Complemento', address[:complement])
@@ -122,7 +122,7 @@ module Clearsale
         b.tag!('DataValidadeCartao', payment.card_expiration)
         b.tag!('NomeTitularCartao', payment.customer_name)
         b.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip : nil)
-        build_collection_address(b, order.billing_address)
+        build_collection_address(b, order.billing_address) if order.billing_address.present?
       end
     end
 
