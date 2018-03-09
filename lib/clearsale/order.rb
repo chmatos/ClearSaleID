@@ -122,7 +122,7 @@ module Clearsale
         b.tag!('DataValidadeCartao', payment.card_expiration)
         b.tag!('NomeTitularCartao', payment.customer_name)
         b.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip : nil)
-        build_collection_address(b, order.billing_addre if order.billing_address.present?
+        build_collection_address(b, order.billing_address) if order.billing_address.present?
       end
     end
 
