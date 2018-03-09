@@ -8,6 +8,7 @@ module Clearsale
       :mastercard => 2
     }
     def self.to_xml(order, payment, user)
+      puts 'clearsale-chmatos 1.0.13b'
       builder = Builder::XmlMarkup.new(:indent => 2, :encoding => 'utf-8')
       xml = builder.tag!("ClearID_Input") do |b|
         builder.tag!('SessionID', order.session_id)
@@ -22,7 +23,6 @@ module Clearsale
     end
 
     def self.build_order(builder, order, payment, user)
-      puts 'clearsale-chmatos 1.0.13a'
       builder.tag!('PedidoID', order[:id])
       builder.tag!('Data', order.created_at.strftime("%Y-%m-%dT%H:%M:%S"))
       builder.tag!('Email', user[:email])
@@ -84,7 +84,7 @@ module Clearsale
       end
     end
 
-    def self.build_collection_address(builder, address) if
+    def self.build_collection_address(builder, address)
       builder.tag!('EnderecoCobranca') do |b|
         builder.tag!('Logradouro', address[:street_name])
         builder.tag!('Complemento', address[:complement])
@@ -122,7 +122,7 @@ module Clearsale
         b.tag!('DataValidadeCartao', payment.card_expiration)
         b.tag!('NomeTitularCartao', payment.customer_name)
         b.tag!('DocumentoLegal1', user.cpf.present? ? user.cpf.gsub(/[\.\-]*/, '').strip : nil)
-        build_collection_address(b, order.billing_address) if order.billing_address.present?
+        build_collection_address(b, order.billing_addre if order.billing_address.present?
       end
     end
 
