@@ -9,4 +9,4 @@ git commands to push new version
 
 # in your project directory run:
 
-bundle update clearsales-chmatos
+bundle update --source clearsales-chmatos
