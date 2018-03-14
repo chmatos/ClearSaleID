@@ -8,7 +8,7 @@ module Clearsale
       :mastercard => 2
     }
     def self.to_xml(order, payment, user)
-      puts 'clearsale-chmatos 1.0.13b'
+      puts 'clearsale-chmatos 1.0.14'
       builder = Builder::XmlMarkup.new(:indent => 2, :encoding => 'utf-8')
       xml = builder.tag!("ClearID_Input") do |b|
         builder.tag!('SessionID', order.session_id)
@@ -38,10 +38,8 @@ module Clearsale
         build_user_data(b, user, order.billing_address)
       end
 
-      if order.shipping_address.present?
-        builder.tag!('DadosEntrega') do |b|
-          build_user_data(b, user, order.shipping_address)
-        end
+      builder.tag!('DadosEntrega') do |b|
+        build_user_data(b, user, order.shipping_address)
       end
 
       builder.tag!('Pagamentos') do |b|

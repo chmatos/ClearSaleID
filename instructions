@@ -1,0 +1,12 @@
+# in gem directory run:
+
+gem build clearsale.gemspec
+
+gem install clearsales-chmatos-1.0.14.gem
+
+git commands to push new version
+
+
+# in your project directory run:
+
+bundle update clearsales-chmatos
